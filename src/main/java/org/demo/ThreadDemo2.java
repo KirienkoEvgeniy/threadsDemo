@@ -25,16 +25,17 @@ class ThreadDemoB extends Thread{
         super(name);
     }
     @Override
-    public void run()
-    {
+    public void run() {
         System.out.printf("%s started... \n", Thread.currentThread().getName());
-        try {
-            System.out.println("Sleeping...");
-            sleep(10000);
-            System.out.println("Done sleeping, no interrupt.");
-        } catch (InterruptedException e) {
-            System.out.println("ThreadDemoB was interrupted!");
-            e.printStackTrace();
+        while (!isInterrupted()) {
+            try {
+                System.out.println("Sleeping...");
+                sleep(10000);
+                System.out.println("Done sleeping, no interrupt.");
+            } catch (InterruptedException e) {
+                System.out.println("ThreadDemoB was interrupted!");
+                e.printStackTrace();
+            }
         }
     }
 }
